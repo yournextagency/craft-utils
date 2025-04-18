@@ -311,9 +311,20 @@ class ForeignFieldQueryExtension
 
       $fieldAttributes = $query->getBehavior('customFields');
       $fieldLayouts = Craft::$app->getFields()->getLayoutsByType($query->elementType);
-      $fields = array_filter(array_unique(array_reduce($fieldLayouts,
+
+      $customFields = array_reduce($fieldLayouts,
         fn($fields, $fieldLayout) => array_merge($fields, $fieldLayout->getCustomFields()),
-        [])),
+        []);
+
+      $filteredFields = $customFields;
+      if (class_exists('\verbb\formie\base\Field')) {
+        $filteredFields = array_filter($customFields,
+          fn ($field) => !($field instanceof \verbb\formie\base\Field)
+        );
+      }
+
+      $fields = array_filter(
+        array_unique($filteredFields),
         fn($field) => $field instanceof ForeignField
       );
 

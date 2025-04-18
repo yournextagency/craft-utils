@@ -1,5 +1,5 @@
 {
-  "name": "sebastianlenz/craft-utils",
+  "name": "yournextagency/craft-utils",
   "description": "A collection of utility classes for Craft CMS development",
   "license": "MIT",
   "require": {
@@ -15,9 +15,6 @@
     "allow-plugins": {
       "yiisoft/yii2-composer": true,
       "craftcms/plugin-installer": true
-    },
-    "platform": {
-      "php": "8.2.0"
     }
   },
   "require-dev": {
